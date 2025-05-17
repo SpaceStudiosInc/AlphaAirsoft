@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Map - Alpha Airsoft</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -17,10 +17,9 @@
       font-family: 'Roboto', sans-serif;
       background-color: #000;
       color: #ccf2ff;
-      height: 100vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
     nav {
@@ -31,7 +30,7 @@
       padding: 1.2rem 2rem;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 999;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
@@ -47,66 +46,63 @@
       list-style: none;
     }
 
-    nav ul li {
+    nav ul li a {
+      color: inherit;
+      text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
-    nav ul li:hover {
+    nav ul li a:hover {
       color: #00ccff;
     }
 
-    nav ul li a {
-      color: inherit;
-      text-decoration: none;
-    }
-
     #map-container {
-      position: relative;
       width: 100%;
-      flex: 1;
+      max-width: 1200px;
       aspect-ratio: 16 / 9;
-      background: #111;
-      user-select: none;
-      overflow: hidden;
-    }
-
-    @supports not (aspect-ratio: 16 / 9) {
-      #map-container {
-        height: 0;
-        padding-bottom: 56.25%;
-      }
+      margin: auto;
+      position: relative;
     }
 
     #map {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
+      border-radius: 10px;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
 
     .marker, .spawn {
       position: absolute;
-      transform: translate(-50%, -50%);
       width: 28px;
       height: 28px;
       border-radius: 50%;
       border: 2px solid #fff;
+      font-weight: bold;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 14px;
-      color: #000;
-      user-select: none;
+      transform: translate(-50%, -50%);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-clip: padding-box;
+      pointer-events: auto;
     }
 
     .marker {
       background-color: #00ccff;
+      color: #000;
       cursor: pointer;
-      z-index: 2;
+      z-index: 5;
     }
 
     .marker:hover {
@@ -119,10 +115,16 @@
       background-color: #888;
       color: #fff;
       font-size: 12px;
-      padding: 4px 8px;
-      height: auto;
-      border-radius: 6px;
-      z-index: 1;
+      cursor: default;
+    }
+
+    .spawn-label {
+      position: absolute;
+      transform: translate(-50%, 10px);
+      font-size: 12px;
+      font-weight: bold;
+      color: #ccf2ff;
+      pointer-events: none;
     }
 
     .tooltip {
@@ -134,11 +136,11 @@
       font-size: 0.85rem;
       font-weight: 600;
       white-space: nowrap;
-      pointer-events: none;
       opacity: 0;
       transform: translate(-50%, -150%);
       transition: opacity 0.3s ease;
-      z-index: 5;
+      z-index: 6;
+      pointer-events: none;
     }
 
     .marker:hover + .tooltip {
@@ -159,26 +161,39 @@
 
   <div id="map-container">
     <img
-      src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true"
+      src="https://raw.githubusercontent.com/SpaceStudiosInc/AlphaAirsoft/main/images/Map.png"
       alt="Airsoft Map"
       id="map"
     />
+    <div class="overlay">
+      <!-- Castle -->
+      <div class="marker" style="top: 50%; left: 30%;">C</div>
+      <div class="tooltip" style="top: 46%; left: 30%;">Castle</div>
 
-    <!-- Castle -->
-    <div class="marker" style="top: 50%; left: 30%;">C</div>
-    <div class="tooltip" style="top: 45%; left: 30%;">Castle</div>
+      <!-- KillHouse -->
+      <div class="marker" style="top: 30%; left: 50%;">K</div>
+      <div class="tooltip" style="top: 26%; left: 50%;">KillHouse</div>
 
-    <!-- KillHouse -->
-    <div class="marker" style="top: 30%; left: 50%;">K</div>
-    <div class="tooltip" style="top: 25%; left: 50%;">KillHouse</div>
+      <!-- Fort -->
+      <div class="marker" style="top: 25%; left: 40%;">F</div>
+      <div class="tooltip" style="top: 21%; left: 40%;">Fort</div>
 
-    <!-- Fort -->
-    <div class="marker" style="top: 25%; left: 40%;">F</div>
-    <div class="tooltip" style="top: 20%; left: 40%;">Fort</div>
+      <!-- Spawns -->
+      <div class="spawn" style="top: 10%; left: 40%;"></div>
+      <div class="spawn-label" style="top: 12%; left: 40%;">Top Spawn</div>
 
-    <!-- Spawns -->
-    <div class="spawn" style="top: 10%; left: 40%;">Top Spawn</div>
-    <div class="spawn" style="top: 60%; left: 60%;">Bottom Spawn</div>
+      <div class="spawn" style="top: 60%; left: 60%;"></div>
+      <div class="spawn-label" style="top: 62%; left: 60%;">Bottom Spawn</div>
+    </div>
   </div>
-</body>
-</html>
+
+  <script>
+    // Optional: Allow dragging for YOU only
+    const isAdmin = true; // Set false for others
+
+    if (isAdmin) {
+      document.querySelectorAll('.marker').forEach(marker => {
+        marker.style.cursor = "move";
+        marker.setAttribute('draggable', true);
+
+        marker.addEventListener('dragstart',
