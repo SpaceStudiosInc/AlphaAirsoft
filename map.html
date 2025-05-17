@@ -20,7 +20,7 @@
     width: 900px;  /* fixed size matches image */
     height: 506px;
     position: relative;
-    border: 2px solid #0f0;
+    border: 2px solid #000;
     user-select: none;
   }
   #map-wrapper img {
@@ -30,17 +30,17 @@
   }
   .marker {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background: #0f0;
+    width: 20px;
+    height: 20px;
+    background: #000;
     border: 2px solid white;
     border-radius: 50%;
     font-weight: bold;
-    color: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 6px #0f0;
+    box-shadow: 0 0 6px #000;
     cursor: pointer;
     user-select: none;
     transform: translate(-50%, -50%);
@@ -50,7 +50,7 @@
     background: rgba(255,255,255,0.9);
     color: black;
     padding: 6px 10px;
-    border-radius: 6px;
+    border-radius: 4px;
     font-weight: bold;
     white-space: nowrap;
     pointer-events: none;
@@ -87,29 +87,57 @@
 <body>
 
 <div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true" alt="Airsoft Map" />
+  <img src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true" alt="Airsoft Map">
 
-  <!-- Marker C -->
+  <!-- Markers and tooltips -->
+
+  <!-- Castle -->
   <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c" aria-label="Castle marker">C</button>
   <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
 
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p" aria-label="Parking marker">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
+  <!-- Killhouse -->
+  <button class="marker" style="top: 227px; left: 440px;" aria-describedby="tooltip-k" aria-label="Killhouse marker">K</button>
+  <div class="tooltip" id="tooltip-k" style="top: 220px; left: 440px;">Killhouse</div>
 
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f" aria-label="Field marker">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
+  <!-- Market -->
+  <button class="marker" style="top: 160px; left: 360px;" aria-describedby="tooltip-m" aria-label="Market marker">M</button>
+  <div class="tooltip" id="tooltip-m" style="top: 150px; left: 360px;">Market</div>
 
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h" aria-label="Home Base marker">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
+  <!-- Wood Base -->
+  <button class="marker" style="top: 110px; left: 360px;" aria-describedby="tooltip-wb" aria-label="Wood Base marker">WB</button>
+  <div class="tooltip" id="tooltip-wb" style="top: 100px; left: 360px;">Wood Base</div>
 
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example:
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other" aria-label="Other marker">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
+  <!-- Pirate Ship -->
+  <button class="marker" style="top: 313px; left: 505px;" aria-describedby="tooltip-p" aria-label="Pirate Ship marker">P</button>
+  <div class="tooltip" id="tooltip-p" style="top: 300px; left: 505px;">Pirate Ship</div>
+
+  <!-- Fort -->
+  <button class="marker" style="top: 233px; left: 540px;" aria-describedby="tooltip-f" aria-label="Fort marker">F</button>
+  <div class="tooltip" id="tooltip-f" style="top: 220px; left: 540px;">Fort</div>
+
+  <!-- Home Base -->
+  <button class="marker" style="top: 112px; left: 430px;" aria-describedby="tooltip-h" aria-label="Home Base marker">H</button>
+  <div class="tooltip" id="tooltip-h" style="top: 100px; left: 430px;">Home Base</div>
+
+  <!-- Chance's House -->
+  <button class="marker" style="top: 130px; left: 500px;" aria-describedby="tooltip-ch" aria-label="Chance's House marker">CH</button>
+  <div class="tooltip" id="tooltip-ch" style="top: 130px; left: 500px;">Chance's House</div>
+
+  <!-- Top Spawn -->
+  <button class="marker" style="top: 50px; left: 350px;" aria-describedby="tooltip-ts" aria-label="Top Spawn marker">S</button>
+  <div class="tooltip" id="tooltip-ts" style="top: 50px; left: 350px;">Top Spawn</div>
+
+  <!-- Bottom Spawn -->
+  <button class="marker" style="top: 330px; left: 570px;" aria-describedby="tooltip-bs" aria-label="Bottom Spawn marker">S</button>
+  <div class="tooltip" id="tooltip-bs" style="top: 320px; left: 570px;">Bottom Spawn</div>
+
+  <!-- Prep Area -->
+  <button class="marker" style="top: 490px; left: 480px;" aria-describedby="tooltip-pa" aria-label="Prep Area marker">PA</button>
+  <div class="tooltip" id="tooltip-pa" style="top: 480px; left: 480px;">Prep Area</div>
+
+  <!-- Bridge -->
+  <button class="marker" style="top: 430px; left: 440px;" aria-describedby="tooltip-br" aria-label="Bridge marker">BR</button>
+  <div class="tooltip" id="tooltip-br" style="top: 420px; left: 440px;">Bridge</div>
 </div>
 
 </body>
