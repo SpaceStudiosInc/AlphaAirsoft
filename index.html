@@ -3,72 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Airsoft Field</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Airsoft Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: linear-gradient(to bottom right, #0f172a, #1e3a8a);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header, footer, section {
-      background-color: rgba(15, 23, 42, 0.8);
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    nav {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    nav h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffcc;
+      font-size: 1.8rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav ul li {
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li:hover {
+      color: #00ffcc;
+    }
+
+    .hero {
+      height: 90vh;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1581090700227-1e8b5d1df193?auto=format&fit=crop&w=1950&q=80') no-repeat center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero h2 {
+      font-size: 3.5rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffcc;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h2 {
+      font-size: 2.5rem;
+      color: #00ffcc;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .section img:hover {
+      transform: scale(1.02);
+    }
+
+    .signup {
+      background-color: #00ffcc;
+      color: #000;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      margin-top: 3rem;
+    }
+
+    .signup input {
+      margin: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+    }
+
+    .signup button {
+      padding: 0.7rem 2rem;
+      border: none;
+      background-color: #000;
+      color: #00ffcc;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .signup button:hover {
+      background-color: #222;
     }
   </style>
 </head>
-<body class="text-white">
-  <!-- Navigation -->
-  <header class="p-4 sticky top-0 z-10 shadow-lg">
-    <nav class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-blue-300">Airsoft Ops</h1>
-      <ul class="flex space-x-6 text-lg">
-        <li><a href="#index" class="hover:text-blue-400 transition">Home</a></li>
-        <li><a href="#video" class="hover:text-blue-400 transition">Video</a></li>
-        <li><a href="#waiver" class="hover:text-blue-400 transition">Waiver</a></li>
-        <li><a href="#fieldmap" class="hover:text-blue-400 transition">Field Map</a></li>
-      </ul>
-    </nav>
-  </header>
+<body>
+  <nav>
+    <h1>Airsoft Ops</h1>
+    <ul>
+      <li>Home</li>
+      <li>Watch</li>
+      <li>Map</li>
+      <li>Sign Up</li>
+    </ul>
+  </nav>
 
-  <!-- Hero Section -->
-  <section id="home" class="h-screen bg-cover bg-center flex items-center justify-center text-center" style="background-image: url('your-hero-image.jpg');">
-    <div class="bg-black bg-opacity-60 p-10 rounded-xl shadow-xl">
-      <h2 class="text-5xl md:text-7xl font-extrabold mb-6 text-blue-300">Ultimate Airsoft Experience</h2>
-      <p class="text-xl text-blue-100">Tactical. Thrilling. Unforgettable.</p>
-    </div>
+  <section class="hero">
+    <h2>Elite Airsoft Combat</h2>
+    <p>Step into the adrenaline-fueled world of tactical airsoft missions.</p>
   </section>
 
-  <!-- Video Section -->
-  <section id="video" class="py-16">
-    <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold text-blue-200 mb-8">Latest Gameplay Video</h2>
-      <div class="aspect-w-16 aspect-h-9">
-        <iframe class="mx-auto w-full h-96 rounded-lg shadow-lg" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Airsoft Gameplay" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
+  <section class="section">
+    <h2>Watch the Ops</h2>
+    <p>Experience the thrill of live combat footage and epic airsoft showdowns.</p>
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1950&q=80" alt="Airsoft action" />
   </section>
 
-  <!-- Waiver Section -->
-  <section id="waiver" class="py-16">
-    <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold text-blue-200 mb-4">Sign the Waiver</h2>
-      <p class="mb-6 text-blue-100">All players must sign the waiver before participating. Click below to complete it online.</p>
-      <a href="https://yourwaiverlink.com" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full shadow-md transition">Sign Waiver</a>
-    </div>
+  <section class="section">
+    <h2>Map the Battlefield</h2>
+    <p>Navigate strategic locations designed for every style of tactical gameplay.</p>
+    <img src="https://images.unsplash.com/photo-1602872021907-d0d5c79a5d9e?auto=format&fit=crop&w=1950&q=80" alt="Airsoft map" />
   </section>
 
-  <!-- Field Map Section -->
-  <section id="fieldmap" class="py-16">
-    <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold text-blue-200 mb-8">Navigate the Field</h2>
-      <img src="field-map.jpg" alt="Airsoft Field Map" usemap="#fieldmapareas" class="mx-auto rounded-lg border border-blue-500 shadow-md" />
-      <map name="fieldmapareas">
-        <area shape="rect" coords="100,100,200,200" href="#bunker" alt="Bunker">
-        <area shape="circle" coords="300,300,50" href="#sniperhill" alt="Sniper Hill">
-      </map>
-    </div>
+  <section class="section signup">
+    <h2>Join the Mission</h2>
+    <p>Lock in your spot for the next high-stakes operation.</p>
+    <input type="text" placeholder="Name" />
+    <input type="email" placeholder="Email" />
+    <button>Sign Up</button>
   </section>
-
-  <footer class="text-center py-6 text-blue-200">
-    <p>&copy; 2025 Airsoft Ops. All rights reserved.</p>
-  </footer>
 </body>
 </html>
