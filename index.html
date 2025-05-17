@@ -175,15 +175,59 @@
     </ul>
   </nav>
 
-  <section class="hero">
-    <video autoplay muted loop playsinline class="background-video">
-      <source src="https://www.youtube.com/embed/ChykAXLLwLo" />
-      Your browser does not support the video tag.
-    </video>
-    <div class="hero-content">
-      <h2>Elite Airsoft Combat</h2>
-      <p>Step into the adrenaline-fueled world of tactical airsoft missions.</p>
-    </div>
-  </section>
+ <section class="hero">
+  <div class="video-background">
+    <iframe
+      src="https://www.youtube.com/embed/ChykAXLLwLo?autoplay=1&mute=1&controls=0&loop=1&playlist=ChykAXLLwLo&modestbranding=1&playsinline=1"
+      frameborder="0"
+      allow="autoplay; fullscreen; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <div class="hero-content">
+    <h2>Elite Airsoft Combat</h2>
+    <p>Step into the adrenaline-fueled world of tactical airsoft missions.</p>
+  </div>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.video-background iframe {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hero-content {
+  color: white;
+  z-index: 1;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+}
+</style>
+
 </body>
 </html>
