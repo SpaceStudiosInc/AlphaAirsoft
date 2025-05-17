@@ -6,164 +6,62 @@
   <title>Airsoft Map - Alpha Airsoft</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background: #222;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0; 
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+  nav {
+    width: 100%;
+    background: #000; /* Black background */
+    border-bottom: 2px solid #1e90ff;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 
-    nav {
-      width: 100%;
-      background: #1e90ff;
-      border-bottom: 2px solid #000;
-      padding: 12px 24px;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+  nav h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #1e90ff; /* Light blue text */
+    font-weight: 600;
+  }
 
-    nav h1 {
-      margin: 0;
-      font-size: 24px;
-      color: white;
-      font-weight: 600;
-    }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 20px;
-    }
+  nav ul li {
+    margin: 0;
+  }
 
-    nav ul li {
-      margin: 0;
-    }
+  nav ul li a {
+    color: #1e90ff; /* Light blue links */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 18px;
-      padding: 6px 12px;
-      border-radius: 4px;
-      transition: background 0.3s ease;
-    }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background: rgba(30, 144, 255, 0.2); /* subtle blue highlight */
+  }
+</style>
 
-    nav ul li a:hover,
-    nav ul li a:focus {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    #map-wrapper {
-      width: 900px;
-      height: 506px;
-      position: relative;
-      border: 2px solid #000;
-      user-select: none;
-      margin: 20px 0;
-    }
-
-    #map-wrapper img {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .marker {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: #000;
-      border: 2px solid white;
-      border-radius: 50%;
-      font-weight: bold;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 6px #000;
-      cursor: pointer;
-      user-select: none;
-      transform: translate(-50%, -50%);
-    }
-
-    .tooltip {
-      position: absolute;
-      background: rgba(255,255,255,0.9);
-      color: black;
-      padding: 6px 10px;
-      border-radius: 4px;
-      font-weight: bold;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      transform: translate(-50%, -120%);
-    }
-
-    .marker:hover + .tooltip,
-    .marker:focus + .tooltip {
-      opacity: 1;
-    }
-
-    #legend {
-      width: 900px;
-      background: #111;
-      border: 2px solid #000;
-      padding: 10px 20px;
-      box-sizing: border-box;
-      color: white;
-      font-weight: bold;
-    }
-
-    #legend h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-    }
-
-    #legend ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    #legend li {
-      background: #333;
-      border-radius: 4px;
-      padding: 5px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-    }
-
-    #legend .symbol {
-      background: #000;
-      border: 2px solid white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      user-select: none;
-    }
-  </style>
+<nav>
+  <h1>Alpha Airsoft</h1>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="watch.html">Watch</a></li>
+    <li><a href="map.html">Map</a></li>
+    <li><a href="signup.html">Waivers</a></li>
+  </ul>
+</nav>
 </head>
 <body>
 
