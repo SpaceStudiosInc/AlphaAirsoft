@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Watch - Alpha Airsoft</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     /* Reset and base */
     * {
@@ -14,7 +17,7 @@
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: #111;
+      background-color: #000;
       color: #eee;
       line-height: 1.6;
     }
@@ -22,22 +25,36 @@
     /* Navigation */
     nav {
       width: 100%;
-      background-color: #222;
-      border-bottom: 2px solid #fff;
+      /* transparent black gradient overlay */
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+      border-bottom: 2px solid #0ff;
       padding: 15px 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     nav h1 {
       margin: 0;
       font-family: 'Orbitron', sans-serif;
       font-weight: 600;
-      font-size: 28px;
-      color: #fff;
-      flex-grow: 1;
-      text-align: center;
+      font-size: 32px;
+      color: #0ff;
+      flex-grow: 0;
+      text-align: left;
+      letter-spacing: 2px;
+      text-shadow:
+        0 0 8px #0ff,
+        0 0 15px #0ff,
+        0 0 20px #0ff,
+        0 0 30px #0ff;
     }
 
     nav ul {
@@ -45,7 +62,7 @@
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 25px;
+      gap: 30px;
       justify-content: flex-end;
       flex-grow: 1;
     }
@@ -55,87 +72,123 @@
     }
 
     nav ul li a {
-      color: #fff;
+      color: #0ff;
       text-decoration: none;
       font-weight: 700;
       font-size: 18px;
       padding: 8px 14px;
       border-radius: 5px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
       display: inline-block;
+      text-shadow:
+        0 0 5px #0ff;
     }
 
     nav ul li a:hover,
     nav ul li a:focus {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(0, 255, 255, 0.3);
+      color: #fff;
       outline: none;
+      text-shadow:
+        0 0 8px #0ff,
+        0 0 15px #0ff;
+    }
+
+    nav ul li a[aria-current='page'] {
+      background-color: #0ff;
+      color: #000;
+      box-shadow:
+        0 0 10px #0ff,
+        0 0 20px #0ff,
+        0 0 30px #0ff;
+      cursor: default;
     }
 
     /* Section title */
     section h2 {
       font-family: 'Orbitron', sans-serif;
       font-weight: 600;
-      font-size: 36px;
-      margin: 40px 0 20px;
+      font-size: 40px;
+      margin: 60px 0 40px;
       text-align: center;
       color: #0ff;
-      letter-spacing: 1.5px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 8px #0ff,
+        0 0 20px #0ff;
     }
 
     /* Video gallery grid */
     .video-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      padding: 0 30px 60px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 36px;
+      padding: 0 30px 80px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .video-item {
-      background-color: #222;
-      border-radius: 10px;
-      box-shadow: 0 0 12px #0ff;
+      background-color: #111;
+      border-radius: 14px;
+      box-shadow:
+        0 0 15px #0ff,
+        inset 0 0 8px #0ff;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 2px solid #0ff;
     }
 
     .video-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0ff;
+      transform: scale(1.07);
+      box-shadow:
+        0 0 30px #0ff,
+        inset 0 0 15px #0ff;
     }
 
     .video-item iframe {
       width: 100%;
-      height: 180px;
+      height: 230px;
       border: none;
+      background-color: #000;
     }
 
     .video-item p {
-      padding: 12px 16px;
+      padding: 14px 16px;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 20px;
       text-align: center;
       color: #0ff;
       margin: 0;
-      letter-spacing: 0.8px;
+      letter-spacing: 2px;
       background-color: #111;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 6px #0ff,
+        0 0 15px #0ff;
     }
 
     /* Footer */
     footer {
-      background-color: #222;
-      color: #ccc;
-      padding: 25px 30px;
+      background-color: #000;
+      color: #666;
+      padding: 30px 30px;
       text-align: center;
-      font-size: 14px;
+      font-size: 15px;
       border-top: 2px solid #0ff;
+      letter-spacing: 1px;
+      font-weight: 400;
+      font-family: 'Roboto', sans-serif;
+      user-select: none;
     }
 
     footer p {
-      margin: 8px 0;
+      margin: 10px 0;
+      text-shadow:
+        0 0 5px #0ff;
     }
 
     footer ul {
@@ -144,18 +197,24 @@
       margin: 10px 0 0;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 26px;
     }
 
     footer ul li a {
       color: #0ff;
       text-decoration: none;
       font-weight: 700;
+      font-size: 15px;
       transition: color 0.3s ease;
+      text-shadow:
+        0 0 8px #0ff;
     }
 
     footer ul li a:hover {
       color: #fff;
+      text-shadow:
+        0 0 15px #0ff,
+        0 0 25px #0ff;
     }
   </style>
 </head>
@@ -177,12 +236,12 @@
       <div class="video-item">
         <iframe
           src="https://www.youtube.com/embed/P22w5LaSID8?si=XAoicKNXy5xDoujX"
-          title="Lastest Video"
+          title="Latest Video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
           referrerpolicy="strict-origin-when-cross-origin"
         ></iframe>
-        <p>Lastest Video</p>
+        <p>Latest Video</p>
       </div>
 
       <div class="video-item">
