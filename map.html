@@ -1,198 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Map - Alpha Airsoft</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      cursor: url('https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Cursor.png?raw=true'), auto;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fixed Marker Positions Map</title>
+<style>
+  body {
+    background: #222;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #map-wrapper {
+    width: 900px;  /* fixed width */
+    height: 506px; /* fixed height matching image */
+    position: relative;
+    /* border for demo */
+    border: 2px solid #0f0;
+  }
+  #map-wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    user-select: none;
+  }
+  .marker {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #0f0;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 6px #0f0;
+    cursor: pointer;
+    user-select: none;
+    transform: translate(-50%, -50%);
+  }
+  .tooltip {
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    color: black;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    transform: translate(-50%, -120%);
+  }
+  .marker:hover + .tooltip,
+  .marker:focus + .tooltip {
+    opacity: 1;
+  }
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #000;
-      color: #ccf2ff;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+  /* Responsive scale */
+  @media (max-width: 950px) {
+    /* Scale the entire wrapper down to fit smaller screens */
+    #map-wrapper {
+      transform-origin: top left;
+      transform: scale(0.8);
+      width: 900px;  /* Keep fixed, scale down */
+      height: 506px;
     }
-
-    nav {
-      background-color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  @media (max-width: 720px) {
+    #map-wrapper {
+      transform: scale(0.6);
     }
-
-    nav h1 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00ccff;
-      font-size: 1.8rem;
+  }
+  @media (max-width: 480px) {
+    #map-wrapper {
+      transform: scale(0.4);
     }
-
-    nav ul {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    nav ul li {
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    nav ul li:hover {
-      color: #00ccff;
-    }
-
-    nav ul li a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    #map-container {
-      position: relative;
-      width: 100%;
-      flex: 1;
-      aspect-ratio: 16 / 9;
-      background: #111;
-      user-select: none;
-      overflow: hidden;
-    }
-
-    @supports not (aspect-ratio: 16 / 9) {
-      #map-container {
-        height: 0;
-        padding-bottom: 56.25%;
-      }
-    }
-
-    #map {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .marker,
-    .spawn {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      user-select: none;
-      background-clip: padding-box;
-    }
-
-    .marker {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      font-size: 14px;
-      color: #000;
-      background-color: #00ccff;
-      cursor: pointer;
-      z-index: 2;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .marker:hover {
-      transform: translate(-50%, -50%) scale(1.3);
-      box-shadow: 0 0 10px #00ccff;
-      z-index: 10;
-    }
-
-    .spawn {
-      background-color: #888;
-      color: #fff;
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 6px;
-      z-index: 1;
-    }
-
-    .tooltip {
-      position: absolute;
-      background: #00ccff;
-      color: #000;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transform: translate(-50%, -150%);
-      transition: opacity 0.3s ease;
-      z-index: 5;
-    }
-
-    .marker:hover + .tooltip {
-      opacity: 1;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <nav>
-    <h1>Alpha Airsoft</h1>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="watch.html">Watch</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="signup.html">Waivers</a></li>
-    </ul>
-  </nav>
 
-  <div id="map-container">
-    <img
-      src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true"
-      alt="Airsoft Map"
-      id="map"
-    />
+<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
+  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map" />
 
-    <!-- Markers -->
-    <div class="marker" style="top: 43%; left: 40%;">C</div>
-    <div class="tooltip" style="top: 41%; left: 40%;">Castle</div>
+  <!-- Markers with fixed px positions -->
+  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
+  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
 
-    <div class="marker" style="top: 33%; left: 40%;">M</div>
-    <div class="tooltip" style="top: 32%; left: 40%;">Market</div>
+  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
+  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
 
-    <div class="marker" style="top: 81%; left: 49%;">B</div>
-    <div class="tooltip" style="top: 79%; left: 49%;">Bridge</div>
+  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
+  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
 
-    <div class="marker" style="top: 45%; left: 50%;">K</div>
-    <div class="tooltip" style="top: 43%; left: 50%;">KillHouse</div>
+  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
+  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
+</div>
 
-    <div class="marker" style="top: 63%; left: 55%;">P</div>
-    <div class="tooltip" style="top: 60%; left: 55%;">Pirate Ship</div>
-
-    <div class="marker" style="top: 33%; left: 63%;">F</div>
-    <div class="tooltip" style="top: 30%; left: 63%;">Fort</div>
-
-    <div class="marker" style="top: 23%; left: 56%;">CH</div>
-    <div class="tooltip" style="top: 20%; left: 56%;">Chance's</div>
-
-    <div class="marker" style="top: 22%; left: 48%;">H</div>
-    <div class="tooltip" style="top: 20%; left: 48%;">Hollow House</div>
-
-    <!-- Spawns -->
-    <div class="spawn" style="top: 92%; left: 60%;">Prep Area</div>
-    <div class="spawn" style="top: 10%; left: 30%;">Top Spawn</div>
-    <div class="spawn" style="top: 65%; left: 75%;">Bottom Spawn</div>
-  </div>
 </body>
 </html>
