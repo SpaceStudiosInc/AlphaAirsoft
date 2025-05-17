@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign Up - Alpha Airsoft</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -60,9 +60,11 @@
 
     .form-section {
       flex: 1;
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
+      padding: 2rem 1rem;    /* side padding for breathing room */
+      width: 100%;           /* full width */
+      max-width: none;       /* remove max-width limit */
+      box-sizing: border-box;
+      margin: 0 auto;
     }
 
     iframe {
