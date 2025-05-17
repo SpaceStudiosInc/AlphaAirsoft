@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Field Map - Alpha Airsoft</title>
+<title>Airsoft Map - Alpha Airsoft</title>
 <style>
   body {
     background: #222;
@@ -16,13 +16,52 @@
     align-items: center;
     min-height: 100vh;
   }
+
+  nav {
+    width: 100%;
+    background: #111;
+    border-bottom: 2px solid #000;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  nav ul li {
+    margin: 0;
+  }
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background: #444;
+  }
+
   #map-wrapper {
     width: 900px;  /* fixed size matches image */
     height: 506px;
     position: relative;
     border: 2px solid #000;
     user-select: none;
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
   #map-wrapper img {
     width: 100%;
@@ -111,6 +150,16 @@
 </style>
 </head>
 <body>
+
+<nav>
+  <h1>Alpha Airsoft</h1>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="watch.html">Watch</a></li>
+    <li><a href="map.html">Map</a></li>
+    <li><a href="signup.html">Waviers</a></li>
+  </ul>
+</nav>
 
 <div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
   <img src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true" alt="Airsoft Map">
