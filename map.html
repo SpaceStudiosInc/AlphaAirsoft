@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Map - Airsoft Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: url('https://cdn.custom-cursor.com/cursors/pack2177.png'), auto;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #000;
+      color: #ccf2ff;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+    }
+    nav h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ccff;
+      font-size: 1.8rem;
+    }
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav ul li {
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    nav ul li:hover {
+      color: #00ccff;
+    }
+
+    /* Map container and styles */
+    #map-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      cursor: grab;
+    }
+    #map-container:active {
+      cursor: grabbing;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      transform-origin: 0 0;
+      user-select: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Marker styles */
+    .marker {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #00ccff;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      user-select: none;
+      z-index: 10;
+      transform-origin: center;
+    }
+
+    .marker:hover {
+      transform: scale(1.4);
+      box-shadow: 0 0 10px #00ccff;
+      z-index: 20;
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: absolute;
+      background: #00ccff;
+      color: #000;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      user-select: none;
+      z-index: 20;
+    }
+
+    .marker:hover + .tooltip {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>Airsoft Ops</h1>
+    <ul>
+      <li><a href="index.html" style="color:inherit; text-decoration:none;">Home</a></li>
+      <li><a href="watch.html" style="color:inherit; text-decoration:none;">Watch</a></li>
+      <li><a href="map.html" style="color:inherit; text-decoration:none;">Map</a></li>
+      <li><a href="signup.html" style="color:inherit; text-decoration:none;">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <div id="map-container">
+    <img src="https://images.unsplash.com/photo-1561484931-81a75dfe51c9?auto=format&fit=crop&w=1600&q=80" alt="Airsoft Map" id="map" draggable="false" />
+
+    <!-- Markers -->
+    <div class="marker" style="top: 30%; left: 40%;">A</div>
+    <div class="tooltip" style="top: 35%; left: 42%;">Alpha Base</div>
+
+    <div class="marker" style="top: 60%; left: 50%;">B</div>
+    <div class="tooltip" style="top: 65%; left: 52%;">Bravo Point</div>
+
+    <div class="marker" style="top: 45%; left: 70%;">C</div>
+    <div class="tooltip" style="top: 50%; left: 72%;">Charlie Spot</div>
+  </div>
+
+  <script>
+    const mapContainer = document.getElementById('map-container');
+    const map = document.getElementById('map');
+    let scale = 1;
+    let mapX = 0;
+    let mapY = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    function setTransform() {
+      map.style.transform = `translate(${mapX}px, ${mapY}px) scale(${scale})`;
+      // Move markers and tooltips accordingly
+      document.querySelectorAll('.marker, .tooltip').forEach(el => {
+        const origLeft = parseFloat(el.getAttribute('data-left')) || parseFloat(el.style.left);
+        const origTop = parseFloat(el.getAttribute('data-top')) || parseFloat(el.style.top);
+        if (!isNaN(origLeft) && !isNaN(origTop)) {
+          el.style.left = `calc(${origLeft}% + ${mapX}px)`;
+          el.style.top = `calc(${origTop}% + ${mapY}px)`;
+          el.style.transform = `scale(${scale})`;
+          el.style.transformOrigin = '0 0';
+          // Store original positions to data attributes if not set
+          if (!el.hasAttribute('data-left')) el.setAttribute('data-left', origLeft);
+          if (!el.hasAttribute('data-top')) el.setAttribute('data-top', origTop);
+        }
+      });
+    }
+
+    // Zoom with mouse wheel
+    mapContainer.addEventListener('wheel', e => {
+      e.preventDefault();
+      const zoomIntensity = 0.1;
+      if (e.deltaY < 0) {
+        scale += zoomIntensity;
+      } else {
+        scale -= zoomIntensity;
+      }
+      scale = Math.min(Math.max(1, scale), 3);
+      setTransform();
+    });
+
+    // Drag to pan
+    mapContainer.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.clientX - mapX;
+      dragStartY = e.clientY - mapY;
+      mapContainer.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      mapContainer.style.cursor = 'grab';
+    });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      mapX = e.clientX - dragStartX;
+      mapY = e.clientY - dragStartY;
+      setTransform();
+    });
+  </script>
+</body>
+</html>
