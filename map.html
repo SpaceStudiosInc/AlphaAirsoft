@@ -1,132 +1,16 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Airsoft Map with Fixed Markers</title>
-<style>
-  body {
-    background: #222;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  #map-wrapper {
-    width: 900px;  /* fixed size matches image */
-    height: 506px;
-    position: relative;
-    border: 2px solid #0f0;
-    user-select: none;
-  }
-  #map-wrapper img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .marker {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: #0f0;
-    border: 2px solid white;
-    border-radius: 50%;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 6px #0f0;
-    cursor: pointer;
-    user-select: none;
-    transform: translate(-50%, -50%);
-  }
-  .tooltip {
-    position: absolute;
-    background: rgba(255,255,255,0.9);
-    color: black;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    transform: translate(-50%, -120%);
-  }
-  .marker:hover + .tooltip,
-  .marker:focus + .tooltip {
-    opacity: 1;
-  }
-
-  /* Responsive scaling */
-  @media (max-width: 950px) {
-    #map-wrapper {
-      transform-origin: top left;
-      transform: scale(0.8);
-      width: 900px;
-      height: 506px;
-    }
-  }
-  @media (max-width: 720px) {
-    #map-wrapper {
-      transform: scale(0.6);
-    }
-  }
-  @media (max-width: 480px) {
-    #map-wrapper {
-      transform: scale(0.4);
-    }
-  }
-</style>
-</head>
-<body data-new-gr-c-s-check-loaded="9.78.0" data-gr-ext-installed="">
-
-<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
-
-  <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-
-</div>
-
-
-
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Airsoft Map with Fixed Markers</title>
 <style>
   body {
     background: #222;
     color: white;
     font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
+    margin: 0; 
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -200,270 +84,33 @@
   }
 </style>
 </head>
-<body data-new-gr-c-s-check-loaded="9.78.0" data-gr-ext-installed="">
+<body>
 
 <div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
+  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map" />
 
   <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
+  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c" aria-label="Castle marker">C</button>
   <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
 
   <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
+  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p" aria-label="Parking marker">P</button>
   <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
 
   <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
+  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f" aria-label="Field marker">F</button>
   <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
 
   <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
+  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h" aria-label="Home Base marker">H</button>
   <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
 
   <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
+  <!-- Example:
+  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other" aria-label="Other marker">O</button>
   <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
   -->
-
 </div>
-
-
 
 </body>
-<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
-
-  <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-
-</div>
-<img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-<!-- Markers with fixed pixel positions -->
-<!-- Marker C -->
-<button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-<div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-<!-- Marker P -->
-<button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-<div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-<!-- Marker F -->
-<button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-<div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-<!-- Marker H -->
-<button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-<div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-<!-- Add your other markers below with correct fixed pixel positions -->
-<!-- Example -->
-<!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
-
-  <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-
-</div>
-<body data-new-gr-c-s-check-loaded="9.78.0" data-gr-ext-installed="">
-
-<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
-
-  <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-
-</div>
-
-
-
-</body>
-<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
-<html lang="en"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Airsoft Map with Fixed Markers</title>
-<style>
-  body {
-    background: #222;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  #map-wrapper {
-    width: 900px;  /* fixed size matches image */
-    height: 506px;
-    position: relative;
-    border: 2px solid #0f0;
-    user-select: none;
-  }
-  #map-wrapper img {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .marker {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: #0f0;
-    border: 2px solid white;
-    border-radius: 50%;
-    font-weight: bold;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 6px #0f0;
-    cursor: pointer;
-    user-select: none;
-    transform: translate(-50%, -50%);
-  }
-  .tooltip {
-    position: absolute;
-    background: rgba(255,255,255,0.9);
-    color: black;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    transform: translate(-50%, -120%);
-  }
-  .marker:hover + .tooltip,
-  .marker:focus + .tooltip {
-    opacity: 1;
-  }
-
-  /* Responsive scaling */
-  @media (max-width: 950px) {
-    #map-wrapper {
-      transform-origin: top left;
-      transform: scale(0.8);
-      width: 900px;
-      height: 506px;
-    }
-  }
-  @media (max-width: 720px) {
-    #map-wrapper {
-      transform: scale(0.6);
-    }
-  }
-  @media (max-width: 480px) {
-    #map-wrapper {
-      transform: scale(0.4);
-    }
-  }
-</style>
-</head>
-<body data-new-gr-c-s-check-loaded="9.78.0" data-gr-ext-installed="">
-
-<div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
-  <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map">
-
-  <!-- Markers with fixed pixel positions -->
-
-  <!-- Marker C -->
-  <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
-  <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
-
-  <!-- Marker P -->
-  <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
-  <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
-
-  <!-- Marker F -->
-  <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
-  <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
-
-  <!-- Marker H -->
-  <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
-  <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
-
-  <!-- Add your other markers below with correct fixed pixel positions -->
-  <!-- Example -->
-  <!--
-  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
-  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
-  -->
-
-</div>
-
-
-
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+</html>
