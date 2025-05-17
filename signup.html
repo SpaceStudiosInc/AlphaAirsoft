@@ -7,243 +7,110 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  cursor: url('https://raw.githubusercontent.com/SpaceStudiosInc/AlphaAirsoft/main/images/Cursor.png'), auto;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: url('https://raw.githubusercontent.com/SpaceStudiosInc/AlphaAirsoft/main/images/Cursor.png'), auto;
+    }
 
-body {
-  background: #222;
-  color: white;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
+    body {
+      background: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-/* --- NAVIGATION --- */
-/* Override nav styles specifically for map page */
-nav {
-  width: 100%;
-  background: #000; /* black background */
-  border-bottom: 2px solid #1e90ff; /* blue border */
-  padding: 12px 24px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    /* --- NAVIGATION --- */
+    nav {
+      width: 100%;
+      background: #000; /* black background */
+      border-bottom: 2px solid #1e90ff; /* blue border */
+      padding: 12px 24px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-nav h1 {
-  font-size: 24px;
-  color: #1e90ff; /* blue text */
-  font-weight: 600;
-}
+    nav h1 {
+      font-size: 24px;
+      color: #1e90ff; /* blue text */
+      font-weight: 600;
+    }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
 
-nav ul li a {
-  color: #1e90ff; /* blue links */
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
+    nav ul li a {
+      color: #1e90ff; /* blue links */
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 18px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
 
-nav ul li a:hover,
-nav ul li a:focus {
-  background: rgba(30, 144, 255, 0.2); /* lighter blue hover */
-}
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background: rgba(30, 144, 255, 0.2); /* lighter blue hover */
+    }
 
-/* --- HERO SECTION (if present) --- */
-.hero {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 1rem;
-}
+    /* --- FORM SECTION --- */
+    .form-section {
+      margin: 2rem auto;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+    }
 
-.video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: black;
-}
+    .form-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ccff;
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      user-select: none;
+    }
 
-.video-background iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120vw;
-  height: 67.5vw;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
+    /* Responsive iframe wrapper to maintain aspect ratio */
+    .responsive-iframe-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 75%; /* 4:3 aspect ratio */
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+      overflow: hidden;
+    }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding: 2rem 3rem;
-  background: rgba(0, 0, 0, 0.75);
-  border-radius: 12px;
-  max-width: 90vw;
-  color: #00ccff;
-  font-family: 'Orbitron', sans-serif;
-  user-select: none;
-}
+    .responsive-iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 12px;
+    }
 
-.hero-content h2 {
-  font-size: 3.5rem;
-  margin-bottom: 0.5rem;
-}
+    /* Responsive font sizes for smaller screens */
+    @media (max-width: 768px) {
+      .form-section h2 {
+        font-size: 2rem;
+      }
+    }
 
-.hero-content p {
-  font-size: 1.5rem;
-  margin-top: 0;
-  color: #ccf2ff;
-  font-family: 'Roboto', sans-serif;
-}
-
-@media (max-width: 768px) {
-  .hero-content h2 {
-    font-size: 2.5rem;
-  }
-  .hero-content p {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .hero-content h2 {
-    font-size: 1.8rem;
-  }
-  .hero-content p {
-    font-size: 1rem;
-  }
-  .hero {
-    padding: 0 0.5rem;
-  }
-}
-
-/* --- MAP SPECIFIC STYLES --- */
-#map-wrapper {
-  width: 900px;
-  height: 506px;
-  position: relative;
-  border: 2px solid #000;
-  user-select: none;
-  margin: 20px 0;
-}
-
-#map-wrapper img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.marker {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: #000;
-  border: 2px solid white;
-  border-radius: 50%;
-  font-weight: bold;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 6px #000;
-  cursor: pointer;
-  user-select: none;
-  transform: translate(-50%, -50%);
-}
-
-.tooltip {
-  position: absolute;
-  background: rgba(255,255,255,0.9);
-  color: black;
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-weight: bold;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  transform: translate(-50%, -120%);
-}
-
-.marker:hover + .tooltip,
-.marker:focus + .tooltip {
-  opacity: 1;
-}
-
-#legend {
-  width: 900px;
-  background: #111;
-  border: 2px solid #000;
-  padding: 10px 20px;
-  box-sizing: border-box;
-  color: white;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-#legend h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-#legend ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-#legend li {
-  background: #333;
-  border-radius: 4px;
-  padding: 5px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-}
-
-#legend .symbol {
-  background: #000;
-  border: 2px solid white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: bold;
-  user-select: none;
-}
-
+    @media (max-width: 400px) {
+      .form-section h2 {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -257,14 +124,19 @@ nav ul li a:focus {
     </ul>
   </nav>
 
-  <section class="form-section">
+  <section class="form-section" aria-label="Sign Waivers Form">
     <h2>Sign Waviers Here</h2>
-    <iframe
-      src="https://forms.gle/Sf6HKmgLTXWm5QBk6"
-      loading="lazy"
-    >
-      Loading…
-    </iframe>
+    <div class="responsive-iframe-wrapper">
+      <iframe
+        src="https://forms.gle/Sf6HKmgLTXWm5QBk6"
+        loading="lazy"
+        title="Alpha Airsoft Waiver Form"
+        allowfullscreen
+        frameborder="0"
+      >
+        Loading…
+      </iframe>
+    </div>
   </section>
 </body>
 </html>
