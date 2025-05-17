@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fixed Marker Positions Map</title>
+<title>Airsoft Map with Fixed Markers</title>
 <style>
   body {
     background: #222;
@@ -16,17 +16,16 @@
     min-height: 100vh;
   }
   #map-wrapper {
-    width: 900px;  /* fixed width */
-    height: 506px; /* fixed height matching image */
+    width: 900px;  /* fixed size matches image */
+    height: 506px;
     position: relative;
-    /* border for demo */
     border: 2px solid #0f0;
+    user-select: none;
   }
   #map-wrapper img {
     width: 100%;
     height: 100%;
     display: block;
-    user-select: none;
   }
   .marker {
     position: absolute;
@@ -63,13 +62,12 @@
     opacity: 1;
   }
 
-  /* Responsive scale */
+  /* Responsive scaling */
   @media (max-width: 950px) {
-    /* Scale the entire wrapper down to fit smaller screens */
     #map-wrapper {
       transform-origin: top left;
       transform: scale(0.8);
-      width: 900px;  /* Keep fixed, scale down */
+      width: 900px;
       height: 506px;
     }
   }
@@ -90,18 +88,31 @@
 <div id="map-wrapper" role="region" aria-label="Airsoft Map with markers">
   <img src="https://airsoft.nyc/static/img/airsoftmap.jpg" alt="Airsoft Map" />
 
-  <!-- Markers with fixed px positions -->
+  <!-- Markers with fixed pixel positions -->
+
+  <!-- Marker C -->
   <button class="marker" style="top: 217px; left: 360px;" aria-describedby="tooltip-c">C</button>
   <div class="tooltip" id="tooltip-c" style="top: 197px; left: 360px;">Castle</div>
 
+  <!-- Marker P -->
   <button class="marker" style="top: 303px; left: 405px;" aria-describedby="tooltip-p">P</button>
   <div class="tooltip" id="tooltip-p" style="top: 283px; left: 405px;">Parking</div>
 
+  <!-- Marker F -->
   <button class="marker" style="top: 213px; left: 495px;" aria-describedby="tooltip-f">F</button>
   <div class="tooltip" id="tooltip-f" style="top: 193px; left: 495px;">Field</div>
 
+  <!-- Marker H -->
   <button class="marker" style="top: 152px; left: 180px;" aria-describedby="tooltip-h">H</button>
   <div class="tooltip" id="tooltip-h" style="top: 132px; left: 180px;">Home Base</div>
+
+  <!-- Add your other markers below with correct fixed pixel positions -->
+  <!-- Example -->
+  <!--
+  <button class="marker" style="top: XXXpx; left: YYYpx;" aria-describedby="tooltip-other">O</button>
+  <div class="tooltip" id="tooltip-other" style="top: (XXX-20)px; left: YYYpx;">Other Info</div>
+  -->
+
 </div>
 
 </body>
