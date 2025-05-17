@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Map - Alpha Airsoft</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -17,9 +17,10 @@
       font-family: 'Roboto', sans-serif;
       background-color: #000;
       color: #ccf2ff;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
     }
 
     nav {
@@ -30,7 +31,7 @@
       padding: 1.2rem 2rem;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 10;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
@@ -46,23 +47,27 @@
       list-style: none;
     }
 
-    nav ul li a {
-      color: inherit;
-      text-decoration: none;
+    nav ul li {
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
-    nav ul li a:hover {
+    nav ul li:hover {
       color: #00ccff;
     }
 
+    nav ul li a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     #map-container {
-      width: 100%;
-      max-width: 1200px;
-      aspect-ratio: 16 / 9;
-      margin: auto;
       position: relative;
+      width: 100%;
+      flex: 1;
+      background: #111;
+      user-select: none;
+      overflow: hidden;
     }
 
     #map {
@@ -70,16 +75,8 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      border-radius: 10px;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
+      user-select: none;
     }
 
     .marker, .spawn {
@@ -88,25 +85,24 @@
       height: 28px;
       border-radius: 50%;
       border: 2px solid #fff;
-      font-weight: bold;
-      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: translate(-50%, -50%);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      pointer-events: auto;
+      font-weight: bold;
+      font-size: 14px;
+      color: #000;
+      background-clip: padding-box;
+      user-select: none;
+      z-index: 2;
     }
 
     .marker {
       background-color: #00ccff;
-      color: #000;
       cursor: pointer;
-      z-index: 5;
     }
 
     .marker:hover {
-      transform: translate(-50%, -50%) scale(1.3);
+      transform: scale(1.2);
       box-shadow: 0 0 10px #00ccff;
       z-index: 10;
     }
@@ -115,16 +111,17 @@
       background-color: #888;
       color: #fff;
       font-size: 12px;
-      cursor: default;
     }
 
     .spawn-label {
       position: absolute;
-      transform: translate(-50%, 10px);
-      font-size: 12px;
-      font-weight: bold;
-      color: #ccf2ff;
-      pointer-events: none;
+      top: 30px;
+      width: max-content;
+      font-size: 0.75rem;
+      color: #fff;
+      white-space: nowrap;
+      transform: translateX(-50%);
+      text-align: center;
     }
 
     .tooltip {
@@ -136,11 +133,11 @@
       font-size: 0.85rem;
       font-weight: 600;
       white-space: nowrap;
-      opacity: 0;
-      transform: translate(-50%, -150%);
-      transition: opacity 0.3s ease;
-      z-index: 6;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      transform: translateY(-10px);
+      z-index: 5;
     }
 
     .marker:hover + .tooltip {
@@ -161,39 +158,72 @@
 
   <div id="map-container">
     <img
-      src="https://raw.githubusercontent.com/SpaceStudiosInc/AlphaAirsoft/main/images/Map.png"
+      src="https://github.com/SpaceStudiosInc/AlphaAirsoft/blob/main/images/Map.png?raw=true"
       alt="Airsoft Map"
       id="map"
     />
-    <div class="overlay">
-      <!-- Castle -->
-      <div class="marker" style="top: 50%; left: 30%;">C</div>
-      <div class="tooltip" style="top: 46%; left: 30%;">Castle</div>
 
-      <!-- KillHouse -->
-      <div class="marker" style="top: 30%; left: 50%;">K</div>
-      <div class="tooltip" style="top: 26%; left: 50%;">KillHouse</div>
+    <!-- Castle -->
+    <div class="marker" style="top: 50%; left: 30%;">C</div>
+    <div class="tooltip" style="top: 45%; left: 30%;">Castle</div>
 
-      <!-- Fort -->
-      <div class="marker" style="top: 25%; left: 40%;">F</div>
-      <div class="tooltip" style="top: 21%; left: 40%;">Fort</div>
+    <!-- KillHouse -->
+    <div class="marker" style="top: 30%; left: 50%;">K</div>
+    <div class="tooltip" style="top: 25%; left: 50%;">KillHouse</div>
 
-      <!-- Spawns -->
-      <div class="spawn" style="top: 10%; left: 40%;"></div>
-      <div class="spawn-label" style="top: 12%; left: 40%;">Top Spawn</div>
+    <!-- Fort -->
+    <div class="marker" style="top: 25%; left: 40%;">F</div>
+    <div class="tooltip" style="top: 20%; left: 40%;">Fort</div>
 
-      <div class="spawn" style="top: 60%; left: 60%;"></div>
-      <div class="spawn-label" style="top: 62%; left: 60%;">Bottom Spawn</div>
+    <!-- Spawns -->
+    <div class="spawn" style="top: 10%; left: 40%;">
+      <div>↑</div>
+      <div class="spawn-label">Top Spawn</div>
+    </div>
+    <div class="spawn" style="top: 60%; left: 60%;">
+      <div>↑</div>
+      <div class="spawn-label">Bottom Spawn</div>
     </div>
   </div>
 
   <script>
-    // Optional: Allow dragging for YOU only
-    const isAdmin = true; // Set false for others
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.get('admin') === 'true';
 
     if (isAdmin) {
-      document.querySelectorAll('.marker').forEach(marker => {
-        marker.style.cursor = "move";
-        marker.setAttribute('draggable', true);
+      document.querySelectorAll('.marker, .spawn').forEach(el => {
+        el.style.cursor = 'move';
+        el.draggable = true;
 
-        marker.addEventListener('dragstart',
+        el.addEventListener('dragstart', e => {
+          const rect = el.parentElement.getBoundingClientRect();
+          const offsetX = (e.clientX - rect.left) / rect.width;
+          const offsetY = (e.clientY - rect.top) / rect.height;
+          e.dataTransfer.setData('offsetX', offsetX);
+          e.dataTransfer.setData('offsetY', offsetY);
+          e.dataTransfer.setData('id', el.outerHTML); // fallback
+          window.draggingEl = el;
+        });
+      });
+
+      document.getElementById('map-container').addEventListener('dragover', e => {
+        e.preventDefault();
+      });
+
+      document.getElementById('map-container').addEventListener('drop', e => {
+        e.preventDefault();
+        const rect = e.currentTarget.getBoundingClientRect();
+        const percentX = ((e.clientX - rect.left) / rect.width) * 100;
+        const percentY = ((e.clientY - rect.top) / rect.height) * 100;
+
+        if (window.draggingEl) {
+          window.draggingEl.style.left = `${percentX}%`;
+          window.draggingEl.style.top = `${percentY}%`;
+          // Optional: Save to console
+          console.log(`New position: top: ${percentY.toFixed(1)}%; left: ${percentX.toFixed(1)}%;`);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
