@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Airsoft Map with Fixed Markers</title>
+<title>Airsoft Map with Fixed Markers and Legend</title>
 <style>
   body {
     background: #222;
@@ -12,7 +12,7 @@
     margin: 0; 
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
   }
@@ -22,6 +22,7 @@
     position: relative;
     border: 2px solid #000;
     user-select: none;
+    margin-bottom: 20px;
   }
   #map-wrapper img {
     width: 100%;
@@ -63,24 +64,49 @@
     opacity: 1;
   }
 
-  /* Responsive scaling */
-  @media (max-width: 950px) {
-    #map-wrapper {
-      transform-origin: top left;
-      transform: scale(1);
-      width: 900px;
-      height: 506px;
-    }
+  /* Legend styles */
+  #legend {
+    width: 900px;
+    background: #111;
+    border: 2px solid #000;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
   }
-  @media (max-width: 720px) {
-    #map-wrapper {
-      transform: scale(1);
-    }
+  #legend h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
   }
-  @media (max-width: 480px) {
-    #map-wrapper {
-      transform: scale(1);
-    }
+  #legend ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  #legend li {
+    background: #333;
+    border-radius: 4px;
+    padding: 5px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+  #legend .symbol {
+    background: #000;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    user-select: none;
   }
 </style>
 </head>
@@ -139,6 +165,24 @@
   <button class="marker" style="top: 430px; left: 440px;" aria-describedby="tooltip-br" aria-label="Bridge marker">BR</button>
   <div class="tooltip" id="tooltip-br" style="top: 420px; left: 440px;">Bridge</div>
 </div>
+
+<!-- Legend Section -->
+<section id="legend" aria-label="Map Legend">
+  <h2>Legend</h2>
+  <ul>
+    <li><span class="symbol">C</span> Castle</li>
+    <li><span class="symbol">K</span> Killhouse</li>
+    <li><span class="symbol">M</span> Market</li>
+    <li><span class="symbol">WB</span> Wood Base</li>
+    <li><span class="symbol">P</span> Pirate Ship</li>
+    <li><span class="symbol">F</span> Fort</li>
+    <li><span class="symbol">H</span> Home Base</li>
+    <li><span class="symbol">CH</span> Chance's House</li>
+    <li><span class="symbol">S</span> Spawn (Top / Bottom)</li>
+    <li><span class="symbol">PA</span> Prep Area</li>
+    <li><span class="symbol">BR</span> Bridge</li>
+  </ul>
+</section>
 
 </body>
 </html>
